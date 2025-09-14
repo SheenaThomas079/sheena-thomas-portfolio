@@ -64,11 +64,12 @@ $(document).ready(function () {
 
 document.addEventListener("visibilitychange", function () {
   if (document.visibilityState === "visible") {
-    document.title = "Portfolio | Jigar Sable";
-    $("#favicon").attr("href", "assets/images/favicon.png");
-  } else {
+    document.title = "Portfolio | Sheena Thomas";
+    $("#favicon").attr("href", "assets/images/heroine.png");
+  } 
+  else {
     document.title = "Come Back To Portfolio";
-    $("#favicon").attr("href", "assets/images/favhand.png");
+    $("#favicon").attr("href", "assets/images/heroine.png");
   }
 });
 
@@ -99,6 +100,7 @@ async function fetchData(type = "skills") {
 
 function showSkills(skills) {
   let skillsContainer = document.getElementById("skillsContainer");
+  
   let skillHTML = "";
   skills.forEach((skill) => {
     skillHTML += `
