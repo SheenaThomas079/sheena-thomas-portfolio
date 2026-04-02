@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sheena Thomas - Full Stack Web Developer Portfolio" />
+    <title>Sheena Thomas | Portfolio</title>
+
+    <!-- Google Fonts: Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            400: '#22d3ee', // Cyan 400
+                            500: '#06b6d4', // Cyan 500
+                            600: '#3b82f6', // Blue 500
+                        },
+                        darkBase: '#020617', // Slate 950
+                        glass: 'rgba(30, 41, 59, 0.4)', // Slate 800 with opacity
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'blob': 'blob 7s infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- AOS Animate on Scroll -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .nav-scrolled {
+            @apply bg-darkBase/80 backdrop-blur-lg shadow-2xl transition-all duration-500;
+            border-bottom: 1px solid rgba(34, 211, 238, 0.1);
+        }
+
+        .text-gradient {
+            @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-400 to-brand-600;
+        }
+
+        .btn-primary {
+            @apply bg-gradient-to-r from-brand-500 to-brand-600 text-white shadow-[0_0_20px_rgba(6, 182, 212, 0.3)] hover:shadow-[0_0_30px_rgba(6, 182, 212, 0.6)] hover:scale-105 transition-all duration-300;
+        }
+
+        .glass-panel {
+            @apply bg-glass backdrop-blur-xl border border-slate-800/50 shadow-2xl;
+        }
+
+        /* Modern generic scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #06b6d4;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body class="bg-darkBase text-slate-400 antialiased overflow-x-hidden selection:bg-brand-500 selection:text-white">
+
+    <!-- Ambient Background Glowing Blobs -->
+    <div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+        <div
+            class="absolute top-0 left-1/4 w-96 h-96 bg-brand-600/20 rounded-full mix-blend-screen filter blur-[120px] opacity-50 animate-blob">
+        </div>
+        <div
+            class="absolute top-1/4 right-1/4 w-96 h-96 bg-brand-400/20 rounded-full mix-blend-screen filter blur-[120px] opacity-50 animate-blob animation-delay-2000">
+        </div>
+        <div
+            class="absolute -bottom-32 left-1/2 w-[500px] h-[500px] bg-purple-600/20 rounded-full mix-blend-screen filter blur-[120px] opacity-40 animate-blob animation-delay-4000">
+        </div>
+        <!-- Particles subtle layer -->
+        <div id="particles-js" class="absolute inset-0 opacity-20"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-transparent py-5">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <a href="#"
+                class="text-3xl font-heading font-extrabold tracking-tight flex items-center gap-2 text-white group">
+                <i class="fas fa-layer-group text-brand-400 group-hover:rotate-12 transition-transform"></i> Sheena
+                Thomas
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-8 font-medium text-sm tracking-wide">
+                <a href="#home" class="text-slate-300 hover:text-white transition-colors relative group">Home
+                    <span
+                        class="absolute -bottom-1.5 left-0 w-0 h-0.5 bg-brand-400 transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#about" class="text-slate-300 hover:text-white transition-colors relative group">About
+                    <span
+                        class="absolute -bottom-1.5 left-0 w-0 h-0.5 bg-brand-400 transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#skills" class="text-slate-300 hover:text-white transition-colors relative group">Skills
+                    <span
+                        class="absolute -bottom-1.5 left-0 w-0 h-0.5 bg-brand-400 transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#experience"
+                    class="text-slate-300 hover:text-white transition-colors relative group">Experience
+                    <span
+                        class="absolute -bottom-1.5 left-0 w-0 h-0.5 bg-brand-400 transition-all group-hover:w-full"></span>
+                </a>
+                <!-- <a href="#projects" class="text-slate-300 hover:text-white transition-colors relative group">Projects
+                    <span
+                        class="absolute -bottom-1.5 left-0 w-0 h-0.5 bg-brand-400 transition-all group-hover:w-full"></span>
+                </a> -->
+                <a href="#contact"
+                    class="px-5 py-2.5 rounded-full border border-brand-500/50 text-brand-400 hover:bg-brand-500 hover:text-white hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] transition-all">Say
+                    Hello</a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button id="mobile-menu-btn"
+                class="md:hidden text-2xl focus:outline-none text-white hover:text-brand-400 transition-colors">
+                <i class="fas fa-bars-staggered"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="hidden absolute top-full left-0 w-full glass-panel flex-col items-center py-6 space-y-6 md:hidden">
+            <a href="#home" class="mobile-link text-white font-medium hover:text-brand-400 text-lg">Home</a>
+            <a href="#about" class="mobile-link text-white font-medium hover:text-brand-400 text-lg">About</a>
+            <a href="#skills" class="mobile-link text-white font-medium hover:text-brand-400 text-lg">Skills</a>
+            <a href="#experience" class="mobile-link text-white font-medium hover:text-brand-400 text-lg">Experience</a>
+            <a href="#projects" class="mobile-link text-white font-medium hover:text-brand-400 text-lg">Projects</a>
+            <a href="#contact" class="mobile-link btn-primary px-8 py-3 rounded-full mt-2">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-28 pb-12 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 lg:gap-8 items-center z-10">
+            <div data-aos="fade-up" class="text-center lg:text-left order-2 lg:order-1">
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border-brand-500/20 text-brand-400 text-sm font-semibold tracking-wide mb-6">
+                    <span class="relative flex h-3 w-3">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-brand-500"></span>
+                    </span>
+                    Available for Opportunities.
+                </div>
+
+                <h1
+                    class="font-heading text-5xl sm:text-6xl lg:text-7xl font-extrabold mb-4 text-white tracking-tight leading-tight">
+                    Building <br />
+                    <span class="text-gradient">Scalable Full Stack Applications</span>
+                </h1>
+
+                <p class="text-xl sm:text-2xl font-medium mb-8 text-slate-300">
+                    I am <span
+                        class="typing-text text-white underline decoration-brand-500 decoration-4 underline-offset-4 font-bold"></span>
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start items-center">
+                    <!-- <a href="#projects"
+                        class="btn-primary px-8 py-4 rounded-full font-bold tracking-wide w-full sm:w-auto">
+                        View My Work <i class="fas fa-arrow-right ml-2"></i>
+                    </a> -->
+
+                    <div class="flex items-center gap-4 mt-6 sm:mt-0 ml-0 sm:ml-4">
+                        <a href="https://www.linkedin.com/in/sheena-thomas-53452b252" target="_blank"
+                            class="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-xl text-slate-300 hover:text-[#0077b5] hover:border-[#0077b5] transition-all transform hover:scale-110">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/SheenaThomas079" target="_blank"
+                            class="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-xl text-slate-300 hover:text-white hover:border-white transition-all transform hover:scale-110">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div data-aos="zoom-in" data-aos-delay="200"
+                class="flex justify-center lg:justify-end order-1 lg:order-2 w-full">
+                <div class="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-[400px] lg:h-[400px] animate-float">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-tr from-brand-600 to-brand-400 rounded-full blur-[40px] opacity-40">
+                    </div>
+                    <!-- Profile Image -->
+                    <div
+                        class="relative w-full h-full rounded-[40px] overflow-hidden border-2 border-slate-700/50 shadow-2xl transition-all duration-500 p-2 glass-panel">
+                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80"
+                            alt="Professional Development Setup"
+                            class="w-full h-full object-cover rounded-[32px] opacity-90 hover:opacity-100 transition-opacity">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <div
+                    class="inline-flex items-center gap-2 text-brand-400 font-bold mb-4 uppercase tracking-widest text-sm justify-center">
+                    <span class="w-8 h-0.5 bg-brand-400"></span> Get To Know Me <span
+                        class="w-8 h-0.5 bg-brand-400"></span>
+                </div>
+                <h2 class="font-heading text-4xl md:text-5xl font-extrabold text-white">
+                    About Me
+                </h2>
+            </div>
+
+            <!-- Modern Bento Grid Layout Without Image -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+                <!-- Large Bio Card spanning 2 cols -->
+                <div class="lg:col-span-2 glass-panel rounded-[2rem] p-8 md:p-12 relative overflow-hidden group border border-slate-700/50 hover:border-brand-500/50 transition-colors duration-500"
+                    data-aos="fade-up">
+                    <div
+                        class="absolute top-0 right-0 w-64 h-64 bg-brand-500/10 rounded-full filter blur-[60px] group-hover:bg-brand-500/20 transition-all duration-700">
+                    </div>
+                    <h3 class="font-heading text-3xl font-extrabold text-white mb-6 tracking-tight">
+                        Sheena Thomas <br /><span class="text-slate-400 font-semibold">Full Stack Developer</span>
+                    </h3>
+                    <div class="relative z-10 space-y-4 mb-10">
+                        <p class="text-slate-300 leading-relaxed text-lg font-medium">
+                            Hello! I'm <span class="text-white font-bold">Sheena Thomas</span>, a passionate Full-Stack
+                            Developer. With a B.Tech in Computer Science and Engineering,
+                            I thrive on bridging the gap between complex engineering logic and stunning visual UI
+                            design.
+                        </p>
+                        <p class="text-slate-300 leading-relaxed text-lg font-medium">
+                            My expertise lies in building resilient, scalable backend architectures using <span
+                                class="text-brand-400 font-bold">Node.js</span> and <span
+                                class="text-brand-400 font-bold">Python</span>, while simultaneously crafting
+                            pixel-perfect, highly intuitive user interfaces with <span
+                                class="text-brand-400 font-bold">React.js</span> and <span
+                                class="text-brand-400 font-bold">Typescript</span>.
+                        </p>
+                    </div>
+                    <a href="./assets/resume/Sheena_Thomas_CV.pdf" target="_blank"
+                        class="inline-flex items-center justify-center px-8 py-4 btn-primary rounded-full font-bold tracking-wide transition-all duration-300 w-full sm:w-auto text-center relative z-10 text-sm">
+                        Download Resume <i class="fas fa-download ml-3 text-white"></i>
+                    </a>
+                </div>
+
+                <!-- Detail Mini Cards -->
+                <div class="glass-panel p-8 rounded-[2rem] flex flex-col sm:flex-row items-start sm:items-center gap-6 group hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(0,0,0,0.5)] transition-all duration-300 border border-slate-700/50 hover:border-brand-500/50"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div
+                        class="w-16 h-16 rounded-2xl bg-brand-500/10 flex flex-shrink-0 items-center justify-center text-brand-400 text-2xl border border-brand-500/30 group-hover:scale-110 group-hover:bg-brand-500 group-hover:text-white transition-all duration-300">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="overflow-hidden w-full">
+                        <p class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Get In Touch</p>
+                        <a href="mailto:sheena079thomas@gmail.com"
+                            class="text-slate-200 hover:text-brand-400 font-semibold transition-colors truncate block text-base md:text-sm lg:text-base">sheena079thomas@gmail.com</a>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-8 rounded-[2rem] flex flex-col sm:flex-row items-start sm:items-center gap-6 group hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(0,0,0,0.5)] transition-all duration-300 border border-slate-700/50 hover:border-purple-500/50"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <div
+                        class="w-16 h-16 rounded-2xl bg-purple-500/10 flex flex-shrink-0 items-center justify-center text-purple-400 text-2xl border border-purple-500/30 group-hover:scale-110 group-hover:bg-purple-500 group-hover:text-white transition-all duration-300 cursor-pointer">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Career Goal</p>
+                        <p class="text-slate-300 font-medium text-sm md:text-base leading-relaxed">Dedicated to writing
+                            immensely pristine code and continually mastering modern frameworks and robust backend
+                            paradigms to deliver exceptional enterprise functionality.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <div
+                    class="inline-flex items-center gap-2 text-brand-400 font-bold mb-4 uppercase tracking-widest text-sm justify-center">
+                    <span class="w-8 h-0.5 bg-brand-400"></span> Experience In <span
+                        class="w-8 h-0.5 bg-brand-400"></span>
+                </div>
+                <h2 class="font-heading text-4xl md:text-5xl font-extrabold text-white">
+                    Technology Stack
+                </h2>
+                <h4 class="text-slate-300 font-medium text-sm md:text-base leading-5">I had an opportunity to work
+                    with the following technologies:</h4>
+            </div>
+
+            <!-- Rendered by JS -->
+            <div id="skills-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5">
+                <!-- Example Template injected by script below -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Experience Section -->
+    <section id="experience" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16">
+
+                <!-- Experience -->
+                <div data-aos="fade-right">
+                    <div class="flex items-center gap-4 mb-10">
+                        <div
+                            class="w-14 h-14 rounded-2xl glass-panel flex flex-center justify-center items-center text-brand-400 shadow-[0_0_15px_rgba(6,182,212,0.2)]">
+                            <i class="fas fa-briefcase text-2xl"></i>
+                        </div>
+                        <h2 class="font-heading text-3xl font-bold text-white">Experience</h2>
+                    </div>
+
+                    <div
+                        class="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-brand-500 before:to-transparent">
+
+                        <div
+                            class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                            <!-- Connecting Line/Dot -->
+                            <div
+                                class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-darkBase bg-brand-500 text-white shadow shadow-brand-500 absolute left-0 md:left-1/2 -translate-x-1/2 z-10 group-hover:scale-125 transition-transform duration-300">
+                                <i class="fas fa-code text-xs"></i>
+                            </div>
+
+                            <!-- Card -->
+                            <div
+                                class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] ml-auto md:ml-0 md:pr-0 pl-0 border border-slate-800 bg-slate-900/50 backdrop-blur-md p-6 rounded-2xl shadow-xl hover:border-brand-500/50 transition-colors flex flex-col items-center text-center">
+                                <div class="text-brand-400 text-sm font-bold tracking-wider mb-1 uppercase">Quest Global
+                                </div>
+                                <h3 class="font-heading text-xl font-bold text-white mb-2">Software Engineer</h3>
+                                <time
+                                    class="block text-xs font-medium text-slate-500 mb-3 bg-slate-800/80 inline-block px-3 py-1 rounded-full"><i
+                                        class="far fa-calendar-alt mr-1"></i> June 2022 - May 2025</time>
+                                <p class="text-slate-400 text-sm leading-relaxed">Developing enterprise wide, highly
+                                    available web applications and contributing to the modernization of legacy
+                                    infrastructures.</p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="relative flex items-center justify-between md:justify-normal md:even:flex-row group">
+                            <div
+                                class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-darkBase bg-slate-700 text-white absolute left-0 md:left-1/2 -translate-x-1/2 z-10 group-hover:scale-125 group-hover:bg-brand-500 transition-all duration-300">
+                                <i class="fas fa-laptop-code text-xs"></i>
+                            </div>
+
+                            <div
+                                class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] ml-auto md:ml-0 md:pl-0 pr-0 border border-slate-800 bg-slate-900/50 backdrop-blur-md p-6 rounded-2xl shadow-xl hover:border-brand-500/50 transition-colors flex flex-col items-center text-center">
+                                <div class="text-brand-400 text-sm font-bold tracking-wider mb-1 uppercase">Flotilla
+                                    Technologies</div>
+                                <h3 class="font-heading text-xl font-bold text-white mb-2">Software Developer</h3>
+                                <time
+                                    class="block text-xs font-medium text-slate-500 mb-3 bg-slate-800/80 inline-block px-3 py-1 rounded-full"><i
+                                        class="far fa-calendar-alt mr-1"></i> June 2021 - Feb 2022</time>
+                                <p class="text-slate-400 text-sm leading-relaxed">Created scalable full-stack
+                                    applications and RESTful backend APIs strictly adhering to secure and performant
+                                    code standards.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div data-aos="fade-left">
+                    <div class="flex items-center gap-4 mb-10">
+                        <div
+                            class="w-14 h-14 rounded-2xl glass-panel flex flex-center justify-center items-center text-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.2)]">
+                            <i class="fas fa-graduation-cap text-2xl"></i>
+                        </div>
+                        <h2 class="font-heading text-3xl font-bold text-white">Education</h2>
+                    </div>
+
+                    <div
+                        class="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-purple-500 before:to-transparent">
+
+                        <div
+                            class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                            <div
+                                class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-darkBase bg-purple-500 text-white shadow shadow-purple-500 absolute left-0 md:left-1/2 -translate-x-1/2 z-10 group-hover:scale-125 transition-transform duration-300">
+                                <i class="fas fa-university text-xs"></i>
+                            </div>
+
+                            <div
+                                class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] ml-auto md:ml-0 md:pr-0 pl-0 border border-slate-800 bg-slate-900/50 backdrop-blur-md p-6 rounded-2xl shadow-xl hover:border-purple-500/50 transition-colors flex flex-col items-center text-center">
+                                <div class="text-purple-400 text-sm font-bold tracking-wider mb-1 uppercase">St. Thomas
+                                    College</div>
+                                <h3 class="font-heading text-xl font-bold text-white mb-2">B.Tech in Computer Science
+                                </h3>
+                                <time
+                                    class="block text-xs font-medium text-slate-500 mb-3 bg-slate-800/80 inline-block px-3 py-1 rounded-full"><i
+                                        class="far fa-calendar-alt mr-1"></i> 2016 - 2020</time>
+                                <p class="text-slate-400 text-sm leading-relaxed">Solidified my foundational knowledge
+                                    surrounding algorithms, data structures, and holistic software engineering
+                                    principles.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <!-- <section id="projects" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <div
+                    class="inline-flex items-center gap-2 text-brand-400 font-bold mb-4 uppercase tracking-widest text-sm justify-center">
+                    <span class="w-8 h-0.5 bg-brand-400"></span> My Portfolio <span
+                        class="w-8 h-0.5 bg-brand-400"></span>
+                </div>
+                <h2 class="font-heading text-4xl md:text-5xl font-extrabold text-white">
+                    Featured Projects
+                </h2>
+            </div>
+
+            <!-- Rendered by JS -->
+    <div id="projects-container" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Example Template injected by script below -->
+    </div>
+    </div>
+    </section> -->
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 relative overflow-hidden">
+        <!-- Big glowing backdrop -->
+        <div class="absolute inset-0 bg-brand-600/5 blur-[150px] z-0"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+
+            <!-- Header -->
+            <div class="text-center mb-16 relative z-10" data-aos="fade-up">
+                <div
+                    class="inline-flex items-center gap-2 px-6 py-2 rounded-full border border-slate-700/50 bg-slate-800/40 backdrop-blur-md text-brand-400 font-bold mb-6 uppercase tracking-widest text-xs">
+                    Get In Touch
+                </div>
+                <h2 class="font-heading text-4xl md:text-5xl lg:text-6xl font-extrabold text-white">
+                    Let's <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-blue-500">Connect</span>
+                </h2>
+            </div>
+
+            <!-- Content Grid -->
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-stretch relative z-10">
+
+                <!-- Map Side -->
+                <div class="w-full h-[350px] lg:h-full min-h-[350px] rounded-[2rem] overflow-hidden glass-panel border border-slate-700/50 p-3 shadow-2xl relative group"
+                    data-aos="fade-right">
+                    <div class="w-full h-full rounded-2xl overflow-hidden relative">
+                        <!-- Google Maps Iframe for Kollam -->
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126177.30948927878!2d76.54148480376722!3d8.904254050239618!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b05fd3036020df5%3A0xc3c1627f108e401b!2sKollam%2C%20Kerala!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                            class="absolute inset-0 w-full h-full border-0" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Cards Side -->
+                <div class="flex flex-col justify-center gap-5" data-aos="fade-left">
+
+                    <!-- Location Card -->
+                    <div
+                        class="glass-panel p-6 sm:p-8 rounded-[2rem] flex items-center gap-6 group hover:translate-x-2 transition-transform duration-300 border border-slate-800 hover:border-pink-500/40 cursor-default bg-slate-900/60">
+                        <div class="flex-shrink-0 w-12 flex justify-center">
+                            <i
+                                class="fas fa-map-pin text-3xl text-pink-500 group-hover:scale-110 transition-transform drop-shadow-[0_0_12px_rgba(236,72,153,0.6)]"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 uppercase tracking-[0.2em] font-bold mb-2">Location</p>
+                            <p class="text-white font-medium text-lg lg:text-xl tracking-wide">Kollam, Kerala, India</p>
+                        </div>
+                    </div>
+
+                    <!-- Email Card -->
+                    <div
+                        class="glass-panel p-6 sm:p-8 rounded-[2rem] flex items-center gap-6 group hover:translate-x-2 transition-transform duration-300 border border-slate-800 hover:border-brand-500/40 bg-slate-900/60">
+                        <div class="flex-shrink-0 w-12 flex justify-center">
+                            <i
+                                class="fas fa-envelope text-3xl text-slate-300 group-hover:text-brand-400 group-hover:scale-110 transition-all duration-300 drop-shadow-[0_0_12px_rgba(6,182,212,0)] group-hover:drop-shadow-[0_0_12px_rgba(6,182,212,0.6)]"></i>
+                        </div>
+                        <div class="overflow-hidden w-full">
+                            <p class="text-xs text-slate-500 uppercase tracking-[0.2em] font-bold mb-2">Email</p>
+                            <a href="mailto:sheena079thomas@gmail.com"
+                                class="text-slate-300 hover:text-white font-medium text-lg lg:text-xl transition-colors truncate block tracking-wide">sheena079thomas@gmail.com</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 bg-darkBase pt-16 pb-8 text-center relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <a href="#" class="inline-block font-heading text-3xl font-extrabold text-white mb-8 group">
+                <i
+                    class="fas fa-layer-group text-brand-500 group-hover:rotate-12 transition-transform drop-shadow-[0_0_10px_rgba(6,182,212,0.8)]"></i>
+                Sheena Thomas
+            </a>
+
+            <div class="flex justify-center items-center gap-6 mb-10">
+                <a href="https://www.linkedin.com/in/sheena-thomas-53452b252" target="_blank"
+                    class="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-slate-400 hover:text-white hover:border-brand-400 hover:shadow-[0_0_15px_rgba(6,182,212,0.5)] transition-all">
+                    <i class="fab fa-linkedin-in text-lg"></i>
+                </a>
+                <a href="https://github.com/SheenaThomas079" target="_blank"
+                    class="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-slate-400 hover:text-white hover:border-brand-400 hover:shadow-[0_0_15px_rgba(6,182,212,0.5)] transition-all">
+                    <i class="fab fa-github text-lg"></i>
+                </a>
+                <a href="mailto:sheena079thomas@gmail.com"
+                    class="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-slate-400 hover:text-white hover:border-brand-400 hover:shadow-[0_0_15px_rgba(6,182,212,0.5)] transition-all">
+                    <i class="fas fa-envelope text-lg"></i>
+                </a>
+            </div>
+
+            <div class="w-full h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent mb-8"></div>
+
+            <p class="text-slate-500 font-medium">Designed and Built with <i
+                    class="fas fa-code text-brand-500 mx-1"></i> by Sheena Thomas &copy; 2026</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top -->
+    <a href="#home" id="scroll-top"
+        class="fixed right-6 bottom-6 w-12 h-12 glass-panel border-brand-500/50 text-brand-400 rounded-full flex items-center justify-center hover:bg-brand-500 hover:text-white shadow-[0_0_15px_rgba(6,182,212,0.3)] opacity-0 invisible transition-all duration-300 z-40 transform hover:-translate-y-2">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Include our generated data file -->
+    <script src="./assets/js/data.js"></script>
+
+    <script>
+        // Initialize AOS Animation
+        AOS.init({
+            once: true,
+            duration: 1000,
+            offset: 80,
+        });
+
+        // Typed.js Effect
+        new Typed('.typing-text', {
+            strings: ['Full Stack Developer.'],
+            typeSpeed: 60,
+            backSpeed: 40,
+            backDelay: 1500,
+            loop: true
+        });
+
+        // Navbar Scroll Effect & Scroll To Top Visibility
+        const navbar = document.getElementById('navbar');
+        const scrollTopBtn = document.getElementById('scroll-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) {
+                navbar.classList.add('nav-scrolled', 'py-3');
+                navbar.classList.remove('py-5');
+                scrollTopBtn.classList.remove('opacity-0', 'invisible');
+            } else {
+                navbar.classList.remove('nav-scrolled', 'py-3');
+                navbar.classList.add('py-5');
+                scrollTopBtn.classList.add('opacity-0', 'invisible');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        const mobileIcon = mobileBtn.querySelector('i');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+
+            if (mobileMenu.classList.contains('flex')) {
+                mobileIcon.classList.remove('fa-bars-staggered');
+                mobileIcon.classList.add('fa-xmark');
+            } else {
+                mobileIcon.classList.remove('fa-xmark');
+                mobileIcon.classList.add('fa-bars-staggered');
+            }
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+                mobileIcon.classList.remove('fa-xmark');
+                mobileIcon.classList.add('fa-bars-staggered');
+            });
+        });
+
+        // Render Skills from data.js
+        const skillsContainer = document.getElementById('skills-container');
+        if (typeof skills !== 'undefined' && skills.length > 0) {
+            skillsContainer.innerHTML = skills.map((skill, index) => {
+                const iconUrl = skill.icon || 'https://img.icons8.com/m_outlined/200/06b6d4/code.png';
+                return `
+                <div data-aos="zoom-in" data-aos-delay="${(index % 6) * 50}" class="glass-panel border-slate-800/80 p-6 rounded-2xl hover:-translate-y-2 hover:border-brand-500 hover:shadow-[0_10px_30px_rgba(6,182,212,0.2)] transition-all duration-300 flex flex-col items-center justify-center gap-4 group">
+                    <img src="${iconUrl}" alt="${skill.name}" class="w-12 h-12 md:w-14 md:h-14 object-contain group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 filter drop-shadow opacity-80 group-hover:opacity-100" />
+                    <span class="font-semibold text-slate-300 text-sm tracking-wide">${skill.name}</span>
+                </div>
+            `;
+            }).join('');
+        }
+
+        // Render Projects from data.js
+        // const projectsContainer = document.getElementById('projects-container');
+        // if (typeof projects !== 'undefined' && projects.length > 0) {
+        //     const uniqueProjects = projects.filter(p => !p.name.includes("Dummy") && p.category !== "basicweb").slice(0, 6);
+
+        //     projectsContainer.innerHTML = uniqueProjects.map((project, index) => `
+        //     <div data-aos="fade-up" data-aos-delay="${index * 100}" class="glass-panel rounded-3xl overflow-hidden group hover:-translate-y-3 hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)] hover:border-brand-500/50 transition-all duration-500 flex flex-col h-full border-slate-700/50">
+                
+        //         <div class="relative overflow-hidden h-56 w-full p-4 pb-0 bg-gradient-to-br from-slate-800 to-slate-900 border-b border-slate-800">
+        //             <img src="./assets/images/projects/${project.image}.png" onerror="this.src='https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="${project.name}" class="w-full h-full object-cover rounded-t-xl group-hover:scale-105 group-hover:translate-y-2 transition-transform duration-700 shadow-xl opacity-80 group-hover:opacity-100">
+        //             <div class="absolute top-6 left-6 flex gap-2">
+        //                 <span class="bg-darkBase/80 backdrop-blur-sm text-brand-400 border border-brand-500/30 text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-lg">${project.category}</span>
+        //             </div>
+        //         </div>
+                
+        //         <div class="p-8 flex-1 flex flex-col relative bg-slate-900/40">
+        //             <!-- Hover Glow Effect -->
+        //             <div class="absolute inset-0 bg-gradient-to-t from-brand-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                    
+        //             <h3 class="font-heading text-2xl font-bold mb-3 text-white group-hover:text-brand-400 transition-colors">${project.name}</h3>
+        //             <p class="text-slate-400 text-sm leading-relaxed mb-8 flex-1 font-medium">${project.desc}</p>
+                    
+        //             <div class="flex items-center gap-4 mt-auto relative z-10 w-full">
+        //                 <a href="${project.links.code !== '#' ? project.links.code : 'javascript:void(0)'}" target="${project.links.code !== '#' ? '_blank' : '_self'}" class="flex-1 text-center py-3 px-4 glass-panel border border-slate-700 hover:border-brand-500 hover:text-brand-400 text-white rounded-xl font-semibold transition-all shadow-md group/btn text-sm">
+        //                     <i class="fab fa-github mr-2 group-hover/btn:rotate-12 transition-transform"></i> Source Code
+        //                 </a>
+        //                 <a href="${project.links.view !== '#' ? project.links.view : 'javascript:void(0)'}" target="${project.links.view !== '#' ? '_blank' : '_self'}" class="w-14 h-[46px] btn-primary rounded-xl flex items-center justify-center font-medium transition-colors shadow-lg group/icon">
+        //                     <i class="fas fa-arrow-right group-hover/icon:-rotate-45 transition-transform duration-300"></i>
+        //                 </a>
+        //             </div>
+        //         </div>
+        //     </div>
+        // `).join('');
+        // }
+
+        // Form explicitly removed, direct mail-to links used instead
+    </script>
+</body>
+
+</html>
